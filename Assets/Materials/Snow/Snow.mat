@@ -112,7 +112,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _Displacement: 0.2
-    - _DisplacementAmount: 0.2
+    - _DisplacementAmount: 0.1
     - _DstBlend: 0
     - _FreshRoughness: 0.5
     - _GlossMapScale: 1
@@ -126,7 +126,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Tess: 16
-    - _Tessellation: 16
+    - _Tessellation: 32
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
