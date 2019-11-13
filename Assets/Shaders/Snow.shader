@@ -49,6 +49,11 @@
         float _Tessellation;
         float2 _UvToWorldRatio;
 
+        float2 getDisplacementUV(float2 uv)
+        {
+            return float2(1-uv.x, uv.y);
+        }
+
         float4 tessDistance(appdata v0, appdata v1, appdata v2)
         {
             float minDist = 10.0;
@@ -58,7 +63,7 @@
 
         float getDisplacement(float2 uv)
         {
-            return (1.0f - tex2Dlod(_DisplacementTex, float4(uv,0,0)).r) * _DisplacementAmount;
+            return (1.0f - tex2Dlod(_DisplacementTex, float4(getDisplacementUV(uv),0,0)).r) * _DisplacementAmount;
         }
 
         float3 calculateDisplacementNormal(float2 uv)
@@ -106,7 +111,7 @@
         {
             float2 uv = IN.uv_FreshAlbedoTex;
 
-            float trampledness = tex2D(_DisplacementTex, uv);
+            float trampledness = tex2D(_DisplacementTex, getDisplacementUV(uv));
 
             float3 freshAlbedo = tex2D(_FreshAlbedoTex, uv).rgb * _FreshColor;
             float3 trampledAlbedo = tex2D(_TrampledAlbedoTex, uv).rgb * _TrampledColor;
@@ -131,7 +136,7 @@
 
             // debug
             //o.Albedo = 0.5;
-            //o.Albedo = float3(uv, 0);
+            //o.Albedo = tex2D(_DisplacementTex, getDisplacementUV(uv)).r;
             //o.Occlusion = 1;
             //o.Smoothness = 0.0;
         }
