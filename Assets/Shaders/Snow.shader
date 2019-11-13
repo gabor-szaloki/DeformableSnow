@@ -15,6 +15,7 @@
         _TrampledRoughnessTex("Trampled Roughness", 2D) = "gray" {}
         _TrampledNormalTex("Trampled Normals", 2D) = "bump" {}
         _TrampledOcclusionTex("Trampled Occlusion", 2D) = "white" {}
+        _TrampledFadePower("Trampled Fade Power", Range(0, 5)) = 1
 
         [Header(Other)]
         _Tessellation("Tessellation", Range(1, 32)) = 16
@@ -100,6 +101,7 @@
         sampler2D _TrampledRoughnessTex;
         sampler2D _TrampledNormalTex;
         sampler2D _TrampledOcclusionTex;
+        float _TrampledFadePower;
 
         struct Input
         {
@@ -111,7 +113,7 @@
         {
             float2 uv = IN.uv_FreshAlbedoTex;
 
-            float trampledness = tex2D(_DisplacementTex, getDisplacementUV(uv));
+            float trampledness = pow(tex2D(_DisplacementTex, getDisplacementUV(uv)), _TrampledFadePower);
 
             float3 freshAlbedo = tex2D(_FreshAlbedoTex, uv).rgb * _FreshColor;
             float3 trampledAlbedo = tex2D(_TrampledAlbedoTex, uv).rgb * _TrampledColor;

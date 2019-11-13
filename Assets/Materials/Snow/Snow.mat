@@ -127,6 +127,7 @@ Material:
     - _SrcBlend: 1
     - _Tess: 16
     - _Tessellation: 32
+    - _TrampledFadePower: 2.5
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
